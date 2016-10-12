@@ -1,3 +1,10 @@
+/** ENCABEZADOS
+*@file Voltmeter2Arduino.c
+*@brief Experimento 3. IE 0624 Laboratorio de Microcontroladores. Escrito orignalmente en el IDE de Arduino
+*@autor Andrés Quesada Acosta, B04927. José Pablo Martínez Hernández, B34024.
+*@date 12 de octubre del 2016.
+*/
+
 int VSensor;
 int sensorValue;
 int Valor;
@@ -19,8 +26,13 @@ void setup (){
 void loop()
 {
  
+/**
+* @brief Lazo de medición de datos analógicos 
+* @param Datos en el pin analógico del microcontrolador
+* @return Resultado de la lectura de los datos
+*/
 
-  VSensor= analogRead (VoltagePin);
+VSensor= analogRead (VoltagePin);
 delay (10);
 Valor = constrain (VSensor , 0 , 1023);
 Voltage = ((Valor)*5)/1023.0; //restringir valores posibles 
