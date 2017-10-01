@@ -1,8 +1,8 @@
 /** ENCABEZADOS
 *@file Voltmeter2.c
-*@brief Experimento 3. IE 0624 Laboratorio de Microcontroladores. Escrito en orignalmente en Pyton
+*@brief Experimento 3. IE 0624 Laboratorio de Microcontroladores. Escrito orignalmente en Pyton
 *@autor Andrés Quesada Acosta, B04927. José Pablo Martínez Hernández, B34024.
-*@date 13 de octubre del 2016.
+*@date 12 de octubre del 2016.
 */
             
 /** Librerias a utilizar */
@@ -34,7 +34,12 @@ voltaje=[]
 
 view_time=2
 
-/**funcion para graficar datos */
+/**
+* @brief Lectura del puerto serial 
+* @param Datos del convertidor analógico digital
+* @return Gráfica dinámica del comportamiento de los datos medidos
+*/
+
 fig1=plt.figure() 
 
 plt.ylim(0,5)
@@ -47,12 +52,12 @@ line1,= plt.plot(voltaje)
 
 arduinoData.flushInput()
 
+/**
+* @brief Lectura del puerto serial 
+* @param Datos del convertidor analógico digital
+* @return Lectrura de los datos 
+*/
 
-
-
- 
-
-   
 while True: #while loops that loops for ever
 
     while (arduinoData.inWaiting()==0): # esperar hasta que hayan datos
@@ -62,20 +67,18 @@ while True: #while loops that loops for ever
     data=arduinoData.readline() #leer linea de arduino
     dataArray=data.split(',')
     volt= float(dataArray[1])#convertir a float
-    
-/** Escritura de archivo csv */
-    
+
+/**
+* @brief Creación del .csv
+* @param Datos leídos por el convertidor
+* @return Archivo .csv con los datos medidos
+*/
     fileCSV.write(data) #escribir valores de tiempo y tension leidos del arduino en un.csv
-    
-    
-    
+       
     try:
         if cnt%2==0:  #tomar la mitad de los valores para generar grafica a tiempo real, se pierde resoucion pero se gana velocidad
             voltaje.append(volt)
-            
-           
-       
-        
+         
                       
 /** Construccion de arreglo de tiempos para graficar */
             timepoints.append(time()-start_time)
